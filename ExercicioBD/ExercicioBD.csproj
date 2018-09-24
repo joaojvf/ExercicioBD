@@ -101,6 +101,7 @@
     <Compile Include="Models\DAO\EmpresaDAO.cs" />
     <Compile Include="Models\DAO\EnderecoDAO.cs" />
     <Compile Include="Models\DAO\OrdemServicoDAO.cs" />
+=======
     <Compile Include="Models\Empresa.cs" />
     <Compile Include="Models\Endereco.cs" />
     <Compile Include="Models\OrdemServico.cs" />

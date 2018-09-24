@@ -37,6 +37,6 @@ namespace ExercicioBD.Models.DAO
             }
 
         }
-        }
     }
-}
+}    
+
