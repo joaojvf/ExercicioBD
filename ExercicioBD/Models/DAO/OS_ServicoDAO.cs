@@ -22,7 +22,7 @@ namespace ExercicioBD.Models.DAO
             {
                 DataTable table = new DataTable();
                 MySqlDataAdapter sqlData;
-                sqlData = new MySqlDataAdapter("SELECT * FROM servico_has_ordem_de_servico", conn.Conexao);
+                sqlData = new MySqlDataAdapter("SELECT * FROM os_servico", conn.Conexao);
                 sqlData.Fill(table);
 
                 return table;

@@ -88,6 +88,7 @@
     <Content Include="vwListarCliente.aspx" />
     <Content Include="vwLogin.aspx" />
     <Content Include="vwOrdemServico.aspx" />
+    <Content Include="vwServicos.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -100,11 +101,6 @@
     <Compile Include="Models\DAO\EmpresaDAO.cs" />
     <Compile Include="Models\DAO\EnderecoDAO.cs" />
     <Compile Include="Models\DAO\OrdemServicoDAO.cs" />
-<<<<<<< HEAD
-    <Compile Include="Models\DAO\OS_ServicoDAO.cs" />
-    <Compile Include="Models\DAO\ServicoDAO.cs" />
-=======
->>>>>>> 470f7afcd1df1d543f1b2ee66c1da5e418b7c27d
     <Compile Include="Models\Empresa.cs" />
     <Compile Include="Models\Endereco.cs" />
     <Compile Include="Models\OrdemServico.cs" />
@@ -152,10 +148,16 @@
     <Compile Include="vwOrdemServico.aspx.designer.cs">
       <DependentUpon>vwOrdemServico.aspx</DependentUpon>
     </Compile>
+    <Compile Include="vwServicos.aspx.cs">
+      <DependentUpon>vwServicos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="vwServicos.aspx.designer.cs">
+      <DependentUpon>vwServicos.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Utils\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

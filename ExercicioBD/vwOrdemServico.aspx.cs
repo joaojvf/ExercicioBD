@@ -14,6 +14,11 @@ namespace ExercicioBD
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            PopularGrid();
+        }
+
+        public void PopularGrid()
+        {
             OrdemServicoDAO osDao = new OrdemServicoDAO();
             DataTable dTable = osDao.ListarTodos();
 
