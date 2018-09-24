@@ -88,6 +88,7 @@
     <Content Include="vwListarCliente.aspx" />
     <Content Include="vwLogin.aspx" />
     <Content Include="vwOrdemServico.aspx" />
+    <Content Include="vwServicos.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +151,13 @@
     </Compile>
     <Compile Include="vwOrdemServico.aspx.designer.cs">
       <DependentUpon>vwOrdemServico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="vwServicos.aspx.cs">
+      <DependentUpon>vwServicos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="vwServicos.aspx.designer.cs">
+      <DependentUpon>vwServicos.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
