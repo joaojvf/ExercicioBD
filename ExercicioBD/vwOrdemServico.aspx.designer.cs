@@ -112,12 +112,21 @@ namespace ExercicioBD {
         protected global::System.Web.UI.WebControls.Button BtnAlterar;
         
         /// <summary>
-        /// Controle BtnListar.
+        /// Controle LblResultado.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnListar;
+        protected global::System.Web.UI.WebControls.Label LblResultado;
+        
+        /// <summary>
+        /// Controle gdvOrdemServico.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gdvOrdemServico;
     }
 }
