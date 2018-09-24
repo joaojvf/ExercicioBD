@@ -80,8 +80,10 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="vwCliente.aspx" />
+    <Content Include="vwEmpresa.aspx" />
     <Content Include="vwEndereco.aspx" />
     <Content Include="vwListarCliente.aspx" />
+    <Content Include="vwLogin.aspx" />
     <Content Include="vwOrdemServico.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -92,10 +94,12 @@
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\ConexaoBD.cs" />
     <Compile Include="Models\DAO\ClienteDAO.cs" />
+    <Compile Include="Models\DAO\EmpresaDAO.cs" />
     <Compile Include="Models\DAO\EnderecoDAO.cs" />
     <Compile Include="Models\DAO\OrdemServicoDAO.cs" />
     <Compile Include="Models\DAO\OS_ServicoDAO.cs" />
     <Compile Include="Models\DAO\ServicoDAO.cs" />
+    <Compile Include="Models\Empresa.cs" />
     <Compile Include="Models\Endereco.cs" />
     <Compile Include="Models\OrdemServico.cs" />
     <Compile Include="Models\OS_Servico.cs" />
@@ -107,6 +111,13 @@
     </Compile>
     <Compile Include="vwCliente.aspx.designer.cs">
       <DependentUpon>vwCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="vwEmpresa.aspx.cs">
+      <DependentUpon>vwEmpresa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="vwEmpresa.aspx.designer.cs">
+      <DependentUpon>vwEmpresa.aspx</DependentUpon>
     </Compile>
     <Compile Include="vwEndereco.aspx.cs">
       <DependentUpon>vwEndereco.aspx</DependentUpon>
@@ -122,6 +133,13 @@
     <Compile Include="vwListarCliente.aspx.designer.cs">
       <DependentUpon>vwListarCliente.aspx</DependentUpon>
     </Compile>
+    <Compile Include="vwLogin.aspx.cs">
+      <DependentUpon>vwLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="vwLogin.aspx.designer.cs">
+      <DependentUpon>vwLogin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="vwOrdemServico.aspx.cs">
       <DependentUpon>vwOrdemServico.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -132,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Utils\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
