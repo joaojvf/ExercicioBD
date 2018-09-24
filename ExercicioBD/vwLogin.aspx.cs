@@ -1,5 +1,7 @@
 ﻿using ExemploBD.Models;
 using ExemploBD.Models.DAO;
+using ExercicioBD.Models;
+using ExercicioBD.Models.DAO;
 using ExercicioBD.Utils;
 using System;
 using System.Collections.Generic;
@@ -34,8 +36,20 @@ namespace ExercicioBD
             }
             else
             {
-                LblResultado.Text = "Acesso invalido";
+                EmpresaDAO empresaDao = new EmpresaDAO();
+                Empresa emp = empresaDao.ValidarLogin(TxtEmail.Text, TxtSenha.Text);
+
+                if( e != null)
+                {
+                    Session["empresa"] = emp;
+                    Response.Redirect("~/vwEmpresa.aspx");
+                }
+                else
+                {
+                    LblResultado.Text = "Acesso invalido";
+                }
             }
+           
         }
 
         protected void TxtSenha_TextChanged(object sender, EventArgs e)

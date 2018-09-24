@@ -71,6 +71,7 @@ namespace ExemploBD
                     TxtEmail.Text = "";
                     TxtSenha.Text = "";
                     LblResultado.Text = "Cliente cadastrado e logado com sucesso!";
+                    Response.Redirect("~/vwLogin.aspx");
 
                 }
             }

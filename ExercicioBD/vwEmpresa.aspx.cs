@@ -13,7 +13,7 @@ namespace ExercicioBD
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            BtnAdd.Visible = false;
         }
 
         protected void BtnAdd_Click(object sender, EventArgs e)
@@ -49,6 +49,11 @@ namespace ExercicioBD
                     TxtEmail.Text = "";
                     TxtSenha.Text = "";
                     LblResultado.Text = "Empresa cadastrada e logada com sucesso!";
+                    Response.Redirect("~/vwLogin.aspx");
+                }
+                else
+                {
+                    LblResultado.Text = "Falha no cadastro!";
 
                 }
             }
