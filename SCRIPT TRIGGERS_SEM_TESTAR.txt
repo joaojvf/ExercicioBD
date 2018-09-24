@@ -1,0 +1,35 @@
+DELIMITER $
+ 
+CREATE TRIGGER tgr_insert_os_servico_prazo AFTER INSERT
+ON os_servico
+
+BEGIN
+    UPDATE ordem_de_servico SET prazo_entrega =( SELECT SUM(tempo_medio) 
+									FROM os_servico oss, servico s
+									WHERE s.cod_servico = oss.servico_id_servico 
+                                    AND oss.ordem_de_servico_numero =  os.numero)
+WHERE numero IN ( SELECT ordem_de_servico_numero
+				  FROM os_servico oss 
+                  );
+END$
+  
+DELIMITER ;
+
+
+
+
+
+DELIMITER $
+ 
+CREATE TRIGGER tgr_insert_os_servico_total AFTER INSERT
+ON os_servico FOR EACH ROW
+
+BEGIN 
+
+    
+UPDATE ordem_de_servico os SET valor = (SELECT sum(valor * quantidade) 
+FROM os_servico  oss WHERE oss.ordem_de_servico_numero = os.numero)
+where os.numero = new.ordem_de_servico_numero
+END$
+  
+DELIMITER ;
