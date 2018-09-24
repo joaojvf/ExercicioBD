@@ -1,6 +1,9 @@
 ExercicioBD/web.config/
 ExercicioBD/bin/
+<<<<<<< HEAD
 ExercicioBD/obj/
 .vs/ExercicioBD/v15/.suo
 *.csproj
 ExercicioBD/ExercicioBD.csproj
+=======
+>>>>>>> 470f7afcd1df1d543f1b2ee66c1da5e418b7c27d
