@@ -48,7 +48,7 @@ namespace ExercicioBD
                     TxtCnpj.Text = "";
                     TxtEmail.Text = "";
                     TxtSenha.Text = "";
-                    LblResultado.Text = "Cliente cadastrado e logado com sucesso!";
+                    LblResultado.Text = "Empresa cadastrada e logada com sucesso!";
 
                 }
             }

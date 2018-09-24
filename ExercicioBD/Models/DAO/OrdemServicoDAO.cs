@@ -78,24 +78,6 @@ namespace ExercicioBD.Models.DAO
         {
             try
             {
-<<<<<<< HEAD
-                //string sql = "INSERT INTO cliente(nome,cpf,rg) VALUES (@nome,@cpf,@rg)";
-                //conn.Comando.CommandText = sql;
-                //conn.Comando.Parameters.AddWithValue("@nome", c.Nome);
-                //conn.Comando.Parameters.AddWithValue("@cpf", c.Cpf);
-                //conn.Comando.Parameters.AddWithValue("@rg", c.Rg);
-
-                //int retorno = conn.Comando.ExecuteNonQuery();
-                //if (retorno > 0)
-                //{
-                //    c.Id = Convert.ToInt32(conn.Comando.LastInsertedId.ToString());
-                //    return c;
-                //}
-                //else
-                //{
-                //    return null;
-                //}
-=======
                 string sql = "INSERT INTO ordem_de_servico(data_solicitacao,prazo_entrega,total,status,cliente_id) " +
                     "VALUES (@data_solicitacao,@prazo_entrega,@total,@status,@cliente_id)";
                 conn.Comando.CommandText = sql;
@@ -115,7 +97,6 @@ namespace ExercicioBD.Models.DAO
                 {
                     return null;
                 }
->>>>>>> 5598c4a5e6dcc192425600c03b91f07ccfb8c62d
             }
             catch (Exception e)
             {
@@ -125,7 +106,6 @@ namespace ExercicioBD.Models.DAO
             {
                 conn.Conexao.Close();
             }
-            return null;
         }
 
         public OrdemServico Alterar(OrdemServico os)
