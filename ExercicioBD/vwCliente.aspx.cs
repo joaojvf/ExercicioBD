@@ -1,5 +1,6 @@
 ﻿using ExemploBD.Models;
 using ExemploBD.Models.DAO;
+using ExercicioBD.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,20 @@ namespace ExemploBD
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["cliente"] == null)
+            {
+                BtnAlterar.Visible = false;
+                BtnBuscar.Visible = false;
+                BtnDel.Visible = false;
+                BtnListar.Visible = false;
+                BtnAddEnd.Visible = false;
+            }
+            else
+            {
+                BtnAdd.Visible = false;
+            }   
         }
+
 
         protected void BtnAdd_Click(object sender, EventArgs e)
         {
@@ -24,8 +37,11 @@ namespace ExemploBD
             string cpf = TxtCpf.Text;
             string rg = TxtRg.Text;
             string id = TxtId.Text;
+            string senha = TxtSenha.Text;
+            string email = TxtEmail.Text;
             
-            if((nome.Equals("") || nome.Length > 45 || cpf.Equals("") || cpf.Length > 11 || rg.Equals("") || rg.Length > 15)) 
+            if((nome.Equals("") || nome.Length > 45 || cpf.Equals("") || cpf.Length > 11 || rg.Equals("") ||
+                rg.Length > 15 || senha.Equals("") || email.Equals("")))
             {
                 LblResultado.Text = "Dados estão inseridos de forma incorreta!!";
             }else if(id != "")
@@ -39,13 +55,23 @@ namespace ExemploBD
                     Nome = nome,
                     Cpf = cpf,
                     Rg = rg,
+                    Email = email, 
+                    Senha = senha
                 };
+
+               // cliente.Senha = Criptografia.Codifica(senha);
 
                 cliente = clienteDao.Inserir(cliente);
                 if (cliente != null)
                 {
                     Session["cliente"] = cliente;
-                    Response.Redirect("~/vwEndereco.aspx");
+                    TxtNome.Text = "";
+                    TxtCpf.Text = "";
+                    TxtRg.Text = "";
+                    TxtEmail.Text = "";
+                    TxtSenha.Text = "";
+                    LblResultado.Text = "Cliente cadastrado e logado com sucesso!";
+
                 }
             }
             
@@ -65,12 +91,16 @@ namespace ExemploBD
                     TxtNome.Text = c.Nome;
                     TxtCpf.Text = c.Cpf;
                     TxtRg.Text = c.Rg;
+                    TxtEmail.Text = c.Email;
+                    TxtSenha.Text = c.Senha;
                 }
                 else
                 {
                     TxtNome.Text = "";
                     TxtCpf.Text = "";
                     TxtRg.Text = "";
+                    TxtEmail.Text = "";
+                    TxtSenha.Text = "";
                 }
             }
 
@@ -85,6 +115,9 @@ namespace ExemploBD
             string nome = TxtNome.Text;
             string cpf = TxtCpf.Text;
             string rg = TxtRg.Text;
+            string email = TxtEmail.Text;
+            string senha = TxtSenha.Text;
+
 
             if (!int.TryParse(TxtId.Text, out id) || id < 0)
             {
@@ -102,7 +135,10 @@ namespace ExemploBD
                     Id = id,
                     Nome = nome,
                     Cpf = cpf,
-                    Rg = rg
+                    Rg = rg,
+                    Email = email,
+                    Senha = senha
+                    
                 });
 
                 if (c != null)
@@ -139,6 +175,16 @@ namespace ExemploBD
         protected void BtnListar_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void TxtSenha_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void BtnAddEnd_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/vwEndereco.aspx");
         }
     }
 }

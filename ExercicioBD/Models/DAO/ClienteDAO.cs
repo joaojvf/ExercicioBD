@@ -61,7 +61,10 @@ namespace ExemploBD.Models.DAO
                         Nome = reader["nome"].ToString(),
                         Id = Convert.ToInt32(reader["id"]),
                         Cpf = reader["cpf"].ToString(),
-                        Rg = reader["rg"].ToString()
+                        Rg = reader["rg"].ToString(),
+                        Senha = reader["senha"].ToString(),
+                        Email = reader["email"].ToString()
+
                     };
                     return c;
                 }
@@ -79,16 +82,55 @@ namespace ExemploBD.Models.DAO
 
         }
 
+        public Cliente ValidarLogin(string email, string senha)
+        {
+            try
+            {
+                string comando = "SELECT * from cliente WHERE email= @email AND " +
+                    "senha = @senha";
+                conn.Comando.CommandText = comando;
+                conn.Comando.Parameters.AddWithValue("@email", email);
+                conn.Comando.Parameters.AddWithValue("@senha", senha);
 
+                MySqlDataReader reader = conn.Comando.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    Cliente c = new Cliente()
+                    {
+                        Nome = reader["nome"].ToString(),
+                        Id = Convert.ToInt32(reader["id"]),
+                        Cpf = reader["cpf"].ToString(),
+                        Rg = reader["rg"].ToString(),
+                        Senha = reader["senha"].ToString(),
+                        Email = reader["email"].ToString()
+
+                    };
+                    return c;
+                }
+                else
+                    return null;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            finally
+            {
+                conn.Conexao.Close();
+            }
+        }
         public Cliente Inserir(Cliente c)
         {
             try
             {
-                string sql = "INSERT INTO cliente(nome,cpf,rg) VALUES (@nome,@cpf,@rg)";
+                string sql = "INSERT INTO cliente(nome,cpf,rg, email, senha) VALUES (@nome,@cpf,@rg, @email, @senha)";
                 conn.Comando.CommandText = sql;
                 conn.Comando.Parameters.AddWithValue("@nome", c.Nome);
                 conn.Comando.Parameters.AddWithValue("@cpf", c.Cpf);
                 conn.Comando.Parameters.AddWithValue("@rg", c.Rg);
+                conn.Comando.Parameters.AddWithValue("@senha", c.Senha);
+                conn.Comando.Parameters.AddWithValue("@email", c.Email);
 
                 int retorno = conn.Comando.ExecuteNonQuery();
                 if (retorno > 0)
@@ -114,12 +156,14 @@ namespace ExemploBD.Models.DAO
         {
             try
             {
-                string sql = "UPDATE cliente SET nome = @nome, cpf=@cpf, rg=@rg WHERE id = @id";
+                string sql = "UPDATE cliente SET nome = @nome, cpf=@cpf, rg=@rg, senha = @senha, email = @email WHERE id = @id";
                 conn.Comando.CommandText = sql;
                 conn.Comando.Parameters.AddWithValue("@nome", c.Nome);
                 conn.Comando.Parameters.AddWithValue("@cpf", c.Cpf);
                 conn.Comando.Parameters.AddWithValue("@rg", c.Rg);
                 conn.Comando.Parameters.AddWithValue("@id", c.Id);
+                conn.Comando.Parameters.AddWithValue("@senha", c.Senha);
+                conn.Comando.Parameters.AddWithValue("@email", c.Email);
                 int retorno = conn.Comando.ExecuteNonQuery();
                 return retorno > 0 ? c : null;
             }

@@ -43,6 +43,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CryptSharp, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CryptSharpOfficial.2.1.0.0\lib\CryptSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -80,8 +83,10 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="vwCliente.aspx" />
+    <Content Include="vwEmpresa.aspx" />
     <Content Include="vwEndereco.aspx" />
     <Content Include="vwListarCliente.aspx" />
+    <Content Include="vwLogin.aspx" />
     <Content Include="vwOrdemServico.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -92,17 +97,27 @@
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\ConexaoBD.cs" />
     <Compile Include="Models\DAO\ClienteDAO.cs" />
+    <Compile Include="Models\DAO\EmpresaDAO.cs" />
     <Compile Include="Models\DAO\EnderecoDAO.cs" />
     <Compile Include="Models\DAO\OrdemServicoDAO.cs" />
+    <Compile Include="Models\Empresa.cs" />
     <Compile Include="Models\Endereco.cs" />
     <Compile Include="Models\OrdemServico.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Criptografia.cs" />
     <Compile Include="vwCliente.aspx.cs">
       <DependentUpon>vwCliente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="vwCliente.aspx.designer.cs">
       <DependentUpon>vwCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="vwEmpresa.aspx.cs">
+      <DependentUpon>vwEmpresa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="vwEmpresa.aspx.designer.cs">
+      <DependentUpon>vwEmpresa.aspx</DependentUpon>
     </Compile>
     <Compile Include="vwEndereco.aspx.cs">
       <DependentUpon>vwEndereco.aspx</DependentUpon>
@@ -117,6 +132,13 @@
     </Compile>
     <Compile Include="vwListarCliente.aspx.designer.cs">
       <DependentUpon>vwListarCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="vwLogin.aspx.cs">
+      <DependentUpon>vwLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="vwLogin.aspx.designer.cs">
+      <DependentUpon>vwLogin.aspx</DependentUpon>
     </Compile>
     <Compile Include="vwOrdemServico.aspx.cs">
       <DependentUpon>vwOrdemServico.aspx</DependentUpon>

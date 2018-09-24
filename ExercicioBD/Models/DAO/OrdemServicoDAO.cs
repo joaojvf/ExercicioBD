@@ -85,22 +85,22 @@ namespace ExercicioBD.Models.DAO
         {
             try
             {
-                string sql = "INSERT INTO cliente(nome,cpf,rg) VALUES (@nome,@cpf,@rg)";
-                conn.Comando.CommandText = sql;
-                conn.Comando.Parameters.AddWithValue("@nome", c.Nome);
-                conn.Comando.Parameters.AddWithValue("@cpf", c.Cpf);
-                conn.Comando.Parameters.AddWithValue("@rg", c.Rg);
+                //string sql = "INSERT INTO cliente(nome,cpf,rg) VALUES (@nome,@cpf,@rg)";
+                //conn.Comando.CommandText = sql;
+                //conn.Comando.Parameters.AddWithValue("@nome", c.Nome);
+                //conn.Comando.Parameters.AddWithValue("@cpf", c.Cpf);
+                //conn.Comando.Parameters.AddWithValue("@rg", c.Rg);
 
-                int retorno = conn.Comando.ExecuteNonQuery();
-                if (retorno > 0)
-                {
-                    c.Id = Convert.ToInt32(conn.Comando.LastInsertedId.ToString());
-                    return c;
-                }
-                else
-                {
-                    return null;
-                }
+                //int retorno = conn.Comando.ExecuteNonQuery();
+                //if (retorno > 0)
+                //{
+                //    c.Id = Convert.ToInt32(conn.Comando.LastInsertedId.ToString());
+                //    return c;
+                //}
+                //else
+                //{
+                //    return null;
+                //}
             }
             catch (Exception e)
             {
@@ -110,6 +110,7 @@ namespace ExercicioBD.Models.DAO
             {
                 conn.Conexao.Close();
             }
+            return null;
         }
         public Cliente Alterar(Cliente c)
         {
