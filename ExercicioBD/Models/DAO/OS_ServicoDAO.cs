@@ -16,6 +16,37 @@ namespace ExercicioBD.Models.DAO
             conn = new ConexaoBD();
         }
 
+
+        public bool Inserir(OS_Servico os_servico)
+        {
+            try
+            {
+                string sql = "INSERT INTO os_servico(servico_id_servico,ordem_de_servico_numero) " +
+                    "VALUES (@servico_id_servico,@ordem_de_servico_numero)";
+                conn.Comando.CommandText = sql;
+                conn.Comando.Parameters.AddWithValue("@servico_id_servico", os_servico.servico.Codigo);
+                conn.Comando.Parameters.AddWithValue("@ordem_de_servico_numero", os_servico.ordemServico.Numero);
+
+                int retorno = conn.Comando.ExecuteNonQuery();
+                if (retorno > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            finally
+            {
+                conn.Conexao.Close();
+            }
+        }
+
         public DataTable ListarTodos()
         {
             try

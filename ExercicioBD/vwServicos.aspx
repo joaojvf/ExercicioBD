@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="vwServicos.aspx.cs" Inherits="ExercicioBD.vwServicos" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="vwServicos.aspx.cs" EnableEventValidation="false" Inherits="ExercicioBD.vwServicos" %>
 
 <!DOCTYPE html>
 
@@ -10,51 +10,54 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:GridView ID="gdvServicos" runat="server"
+            <asp:GridView ID="gdvServico" runat="server"
             AutoGenerateColumns="False" 
-            DataKeyNames="codigo" OnRowCommand="gdvEndereco_RowCommand" 
-            BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" >
+            DataKeyNames="cod_servico"
+            BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" OnRowUpdating="gdvServico_RowUpdating1"  >
             <Columns>
-                <asp:TemplateField HeaderText="Código">
+                <asp:TemplateField HeaderText="Número">   
                     <ItemTemplate>
                         <asp:Label ID="LblRua" runat="server" Text='<%# Bind("cod_servico") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Nome">
-                    <ItemTemplate>
-                        <asp:Label ID="LblNumero" runat="server" Text='<%# Bind("nome") %>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Valor">
-                    <ItemTemplate>
-                        <asp:Label ID="LblComp" runat="server" Text='<%# Bind("valor") %>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Tempo Médio">
-                    <ItemTemplate>
-                        <asp:Label ID="lblBairro" runat="server" Text='R$ <%# Bind("tempo_medio") %>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Quantidade">
-                    <ItemTemplate>
-                        <asp:TextBox ID="txtQuantidade" runat="server"></asp:TextBox>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField>
-                    <ItemTemplate>
-                        <asp:Button ID="BtnAdd" runat="server" Text="Adicionar" />
-                    </ItemTemplate>
-                </asp:TemplateField>
-            </Columns>
-            <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
-            <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
-            <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
-            <SortedAscendingCellStyle BackColor="#F7F7F7" />
-            <SortedAscendingHeaderStyle BackColor="#4B4B4B" />
-            <SortedDescendingCellStyle BackColor="#E5E5E5" />
-            <SortedDescendingHeaderStyle BackColor="#242121" />
-        </asp:GridView>
+                    <asp:TemplateField HeaderText="Nome">
+                        <ItemTemplate>
+                            <asp:Label ID="Label2" runat="server" Text='<%# Bind("nome") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Valor">
+                        <ItemTemplate>
+                            <asp:Label ID="LblValor" runat="server" Text='<%# Bind("valor") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Tempo Médio">
+                        <ItemTemplate>
+                            <asp:Label ID="LblTempo" runat="server" Text='<%# Bind("tempo_medio") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Quantidade">
+                        <ItemTemplate>
+                            <asp:TextBox ID="TxtQuantidade" runat="server"></asp:TextBox>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:Button ID="btnAdd" runat="server" Text="Adicionar" CommandName = "Update" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+                <EditRowStyle BackColor="#999999" />
+                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+            </asp:GridView>
+             <asp:TextBox ID="txtDataSolicitacao" runat="server"></asp:TextBox>
         </div>
     </form>
 </body>
