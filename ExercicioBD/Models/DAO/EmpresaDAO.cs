@@ -1,4 +1,5 @@
 ﻿using ExemploBD.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,5 +45,43 @@ namespace ExercicioBD.Models.DAO
                 conn.Conexao.Close();
             }
         }
+
+        public Empresa ValidarLogin(string email, string senha)
+        {
+            try
+            {
+                string comando = "SELECT * from empresa WHERE email= @email AND " +
+                    "senha = @senha";
+                conn.Comando.CommandText = comando;
+                conn.Comando.Parameters.AddWithValue("@email", email);
+                conn.Comando.Parameters.AddWithValue("@senha", senha);
+
+                MySqlDataReader reader = conn.Comando.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    Empresa e = new Empresa()
+                    {
+                        RazaoSocial = reader["razao_social"].ToString(),
+                        Cnpj = reader["cnpj"].ToString(),
+                        Senha = reader["senha"].ToString(),
+                        Email = reader["email"].ToString()
+
+                    };
+                    return e;
+                }
+                else
+                    return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                conn.Conexao.Close();
+            }
+        }
+
     }
 }

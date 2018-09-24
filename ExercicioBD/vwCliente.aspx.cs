@@ -1,5 +1,6 @@
 ﻿using ExemploBD.Models;
 using ExemploBD.Models.DAO;
+using ExercicioBD.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,6 +71,7 @@ namespace ExemploBD
                     TxtEmail.Text = "";
                     TxtSenha.Text = "";
                     LblResultado.Text = "Cliente cadastrado e logado com sucesso!";
+                    Response.Redirect("~/vwLogin.aspx");
 
                 }
             }
