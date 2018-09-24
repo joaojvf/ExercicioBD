@@ -100,6 +100,11 @@
     <Compile Include="Models\DAO\EmpresaDAO.cs" />
     <Compile Include="Models\DAO\EnderecoDAO.cs" />
     <Compile Include="Models\DAO\OrdemServicoDAO.cs" />
+<<<<<<< HEAD
+    <Compile Include="Models\DAO\OS_ServicoDAO.cs" />
+    <Compile Include="Models\DAO\ServicoDAO.cs" />
+=======
+>>>>>>> 470f7afcd1df1d543f1b2ee66c1da5e418b7c27d
     <Compile Include="Models\Empresa.cs" />
     <Compile Include="Models\Endereco.cs" />
     <Compile Include="Models\OrdemServico.cs" />
@@ -150,6 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Utils\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
