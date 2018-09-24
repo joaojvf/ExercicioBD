@@ -16,20 +16,13 @@ namespace ExercicioBD.Models.DAO
             conn = new ConexaoBD();
         }
 
-        public DataTable ListarTodos(string nome)
+        public DataTable ListarTodos()
         {
             try
             {
                 DataTable table = new DataTable();
                 MySqlDataAdapter sqlData;
-                if (string.IsNullOrEmpty(nome))
-                {
-                    sqlData = new MySqlDataAdapter("SELECT * FROM cliente", conn.Conexao);
-                }
-                else
-                {
-                    sqlData = new MySqlDataAdapter("SELECT * FROM cliente WHERE nome like %" + nome + "%", conn.Conexao);
-                }
+                sqlData = new MySqlDataAdapter("SELECT * FROM ordem_de_servico", conn.Conexao);
                 sqlData.Fill(table);
 
                 return table;
@@ -45,26 +38,27 @@ namespace ExercicioBD.Models.DAO
 
         }
 
-        public Cliente BuscarPorId(int id)
+        public OrdemServico BuscarPorNumero(int numero)
         {
             try
             {
-                string comando = "SELECT * from cliente WHERE id= @id";
+                string comando = "SELECT * from ordem_de_servico WHERE numero= @numero";
                 conn.Comando.CommandText = comando;
-                conn.Comando.Parameters.AddWithValue("@id", id);
+                conn.Comando.Parameters.AddWithValue("@numero", numero);
 
                 MySqlDataReader reader = conn.Comando.ExecuteReader();
                 if (reader.HasRows)
                 {
                     reader.Read();
-                    Cliente c = new Cliente()
+
+                    return new OrdemServico()
                     {
-                        Nome = reader["nome"].ToString(),
-                        Id = Convert.ToInt32(reader["id"]),
-                        Cpf = reader["cpf"].ToString(),
-                        Rg = reader["rg"].ToString()
+                        Numero = Convert.ToInt32(reader["numero"]),
+                        DataSolicitacao = reader["data_solicitacao"].ToString(),
+                        PrazoEntrega = Convert.ToInt32(reader["prazo_entrega"]),
+                        Total = Convert.ToDouble(reader["total"]),
+                        Status = reader["status"].ToString()
                     };
-                    return c;
                 }
                 else
                     return null;
@@ -79,23 +73,25 @@ namespace ExercicioBD.Models.DAO
             }
 
         }
-
-
-        public OrdemServico Inserir(OrdemServico c)
+        
+        public OrdemServico Inserir(OrdemServico os)
         {
             try
             {
-                string sql = "INSERT INTO cliente(nome,cpf,rg) VALUES (@nome,@cpf,@rg)";
+                string sql = "INSERT INTO ordem_de_servico(data_solicitacao,prazo_entrega,total,status,cliente_id) " +
+                    "VALUES (@data_solicitacao,@prazo_entrega,@total,@status,@cliente_id)";
                 conn.Comando.CommandText = sql;
-                conn.Comando.Parameters.AddWithValue("@nome", c.Nome);
-                conn.Comando.Parameters.AddWithValue("@cpf", c.Cpf);
-                conn.Comando.Parameters.AddWithValue("@rg", c.Rg);
+                conn.Comando.Parameters.AddWithValue("@data_solicitacao", os.DataSolicitacao);
+                conn.Comando.Parameters.AddWithValue("@prazo_entrega", os.PrazoEntrega);
+                conn.Comando.Parameters.AddWithValue("@total", os.Total);
+                conn.Comando.Parameters.AddWithValue("@status", os.Status);
+                conn.Comando.Parameters.AddWithValue("@cliente_id", 1);
 
                 int retorno = conn.Comando.ExecuteNonQuery();
                 if (retorno > 0)
                 {
-                    c.Id = Convert.ToInt32(conn.Comando.LastInsertedId.ToString());
-                    return c;
+                    os.Numero = Convert.ToInt32(conn.Comando.LastInsertedId.ToString());
+                    return os;
                 }
                 else
                 {
@@ -111,18 +107,21 @@ namespace ExercicioBD.Models.DAO
                 conn.Conexao.Close();
             }
         }
-        public Cliente Alterar(Cliente c)
+
+        public OrdemServico Alterar(OrdemServico os)
         {
             try
             {
-                string sql = "UPDATE cliente SET nome = @nome, cpf=@cpf, rg=@rg WHERE id = @id";
+                string sql = "UPDATE ordem_de_servico SET data_solicitacao=@data_solicitacao,prazo_entrega=@prazo_entrega," +
+                    "total=@total,status=@status,cliente_id=@cliente_id WHERE numero = @numero";
                 conn.Comando.CommandText = sql;
-                conn.Comando.Parameters.AddWithValue("@nome", c.Nome);
-                conn.Comando.Parameters.AddWithValue("@cpf", c.Cpf);
-                conn.Comando.Parameters.AddWithValue("@rg", c.Rg);
-                conn.Comando.Parameters.AddWithValue("@id", c.Id);
+                conn.Comando.Parameters.AddWithValue("@data_solicitacao", os.DataSolicitacao);
+                conn.Comando.Parameters.AddWithValue("@prazo_entrega", os.PrazoEntrega);
+                conn.Comando.Parameters.AddWithValue("@total", os.Total);
+                conn.Comando.Parameters.AddWithValue("@status", os.Status);
+                conn.Comando.Parameters.AddWithValue("@numero", os.Numero);
                 int retorno = conn.Comando.ExecuteNonQuery();
-                return retorno > 0 ? c : null;
+                return retorno > 0 ? os : null;
             }
             catch (Exception e)
             {
@@ -135,13 +134,13 @@ namespace ExercicioBD.Models.DAO
 
         }
 
-        public bool Deletar(Cliente c)
+        public bool Deletar(OrdemServico os)
         {
             try
             {
                 conn = new ConexaoBD();
-                conn.Comando.CommandText = "DELETE FROM cliente WHERE id = @id;";
-                conn.Comando.Parameters.AddWithValue("@id", c.Id);
+                conn.Comando.CommandText = "DELETE FROM ordem_de_servico WHERE numero = @numero;";
+                conn.Comando.Parameters.AddWithValue("@numero", os.Numero);
                 int retorno = conn.Comando.ExecuteNonQuery();
                 return retorno > 0 ? true : false;
             }
