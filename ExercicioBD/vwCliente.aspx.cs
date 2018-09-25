@@ -50,6 +50,7 @@ namespace ExemploBD
             }
             else
             {
+                senha = CriptografiaSenha.GerarHashMd5(senha);
                 Cliente cliente = new Cliente()
                 {
                     Nome = nome,

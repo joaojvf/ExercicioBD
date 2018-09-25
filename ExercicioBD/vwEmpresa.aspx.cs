@@ -1,9 +1,11 @@
 ﻿using ExercicioBD.Models;
 using ExercicioBD.Models.DAO;
+using ExercicioBD.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -44,6 +46,8 @@ namespace ExercicioBD
             }
             else
             {
+                senha = CriptografiaSenha.GerarHashMd5(senha);
+
                 Empresa empresa = new Empresa()
                 {
                     RazaoSocial = razao_social,
@@ -51,7 +55,7 @@ namespace ExercicioBD
                     Email = email,
                     Senha = senha
                 };
-
+                    
                 empresa = empresaDao.Inserir(empresa);
                 if (empresa != null)
                 {

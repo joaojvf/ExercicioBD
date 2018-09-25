@@ -26,6 +26,7 @@ namespace ExercicioBD
 
         protected void BtnLogar_Click(object sender, EventArgs e)
         {
+            TxtSenha.Text = CriptografiaSenha.GerarHashMd5(TxtSenha.Text);
             ClienteDAO clienteDao = new ClienteDAO();
             Cliente c = clienteDao.ValidarLogin(TxtEmail.Text,TxtSenha.Text);
 
