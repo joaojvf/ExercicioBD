@@ -175,5 +175,10 @@ namespace ExemploBD
 
             }
         }
+
+        protected void gdvEndereco_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

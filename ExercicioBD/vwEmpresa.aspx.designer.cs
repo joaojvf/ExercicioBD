@@ -103,6 +103,15 @@ namespace ExercicioBD {
         protected global::System.Web.UI.WebControls.Button BtnAdd;
         
         /// <summary>
+        /// Controle BtnPopGrid.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnPopGrid;
+        
+        /// <summary>
         /// Controle LblResultado.
         /// </summary>
         /// <remarks>
@@ -110,5 +119,14 @@ namespace ExercicioBD {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblResultado;
+        
+        /// <summary>
+        /// Controle GdvEmpresa.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GdvEmpresa;
     }
 }

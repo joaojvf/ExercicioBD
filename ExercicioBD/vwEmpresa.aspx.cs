@@ -2,6 +2,7 @@
 using ExercicioBD.Models.DAO;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -13,7 +14,18 @@ namespace ExercicioBD
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            BtnAdd.Visible = false;
+            if (Session["empresa"] != null)
+            {
+                BtnAdd.Visible = false;
+                BtnPopGrid.Visible = true;
+            }
+            else
+            {
+                BtnAdd.Visible = true;
+                BtnPopGrid.Visible = false;
+
+            }
+
         }
 
         protected void BtnAdd_Click(object sender, EventArgs e)
@@ -59,6 +71,16 @@ namespace ExercicioBD
             }
         }
 
+
+        public void PopularGrid()
+        {
+            EmpresaDAO empDao = new EmpresaDAO();
+            DataTable dTable = empDao.ListarTodos();
+
+            GdvEmpresa.DataSource = dTable;
+            GdvEmpresa.DataBind();
+        }
+
         protected void TxtSenha_TextChanged(object sender, EventArgs e)
         {
 
@@ -77,6 +99,16 @@ namespace ExercicioBD
         protected void TxtRazaoSocial_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void BtnAtualizar(object sender, EventArgs e)
+        {
+            PopularGrid();
         }
     }
 }

@@ -34,5 +34,10 @@ namespace ExemploBD
         {
             PopulateGrid(TxtNome.Text);
         }
+
+        protected void gdvCliente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
