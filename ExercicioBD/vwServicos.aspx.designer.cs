@@ -31,12 +31,21 @@ namespace ExercicioBD {
         protected global::System.Web.UI.WebControls.GridView gdvServico;
         
         /// <summary>
-        /// Controle txtDataSolicitacao.
+        /// Controle LblResultado.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDataSolicitacao;
+        protected global::System.Web.UI.WebControls.Label LblResultado;
+        
+        /// <summary>
+        /// Controle gdvCarrinho.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gdvCarrinho;
     }
 }

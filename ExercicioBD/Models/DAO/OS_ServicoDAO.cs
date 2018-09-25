@@ -21,11 +21,14 @@ namespace ExercicioBD.Models.DAO
         {
             try
             {
-                string sql = "INSERT INTO os_servico(servico_id_servico,ordem_de_servico_numero) " +
-                    "VALUES (@servico_id_servico,@ordem_de_servico_numero)";
+                string sql = "INSERT INTO os_servico(servico_id_servico,ordem_de_servico_numero, quantidade, valor, prazo) " +
+                    "VALUES (@servico_id_servico,@ordem_de_servico_numero,@quantidade,@valor,@prazo)";
                 conn.Comando.CommandText = sql;
                 conn.Comando.Parameters.AddWithValue("@servico_id_servico", os_servico.servico.Codigo);
                 conn.Comando.Parameters.AddWithValue("@ordem_de_servico_numero", os_servico.ordemServico.Numero);
+                conn.Comando.Parameters.AddWithValue("@quantidade", os_servico.Quantidade);
+                conn.Comando.Parameters.AddWithValue("@valor", os_servico.Valor);
+                conn.Comando.Parameters.AddWithValue("@prazo", os_servico.Prazo);
 
                 int retorno = conn.Comando.ExecuteNonQuery();
                 if (retorno > 0)

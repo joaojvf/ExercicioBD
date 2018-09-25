@@ -26,14 +26,14 @@ namespace ExercicioBD
 
         protected void BtnLogar_Click(object sender, EventArgs e)
         {
-            TxtSenha.Text = CriptografiaSenha.GerarHashMd5(TxtSenha.Text);
             ClienteDAO clienteDao = new ClienteDAO();
             Cliente c = clienteDao.ValidarLogin(TxtEmail.Text,TxtSenha.Text);
 
             if (c != null)
             {
                 Session["cliente"] = c;
-                Response.Redirect("~/vwCliente.aspx");
+                Session["OrdemDeServico"] = GerarOrdemServico(c);
+                Response.Redirect("~/vwServicos.aspx");
             }
             else
             {
@@ -56,6 +56,19 @@ namespace ExercicioBD
         protected void TxtSenha_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+
+        public OrdemServico GerarOrdemServico(Cliente c)
+        {
+            OrdemServico os = new OrdemServico()
+            {
+                DataSolicitacao = DateTime.Now.ToString("dd/MM/yyyy"),
+                Status = "Aberto",
+                Cliente = c
+            };
+            OrdemServicoDAO osDao = new OrdemServicoDAO();
+            return osDao.Inserir(os);
         }
     }
 }

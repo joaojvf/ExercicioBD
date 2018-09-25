@@ -1,11 +1,8 @@
 ﻿using ExercicioBD.Models;
 using ExercicioBD.Models.DAO;
-using ExercicioBD.Utils;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -16,18 +13,7 @@ namespace ExercicioBD
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["empresa"] != null)
-            {
-                BtnAdd.Visible = false;
-                BtnPopGrid.Visible = true;
-            }
-            else
-            {
-                BtnAdd.Visible = true;
-                BtnPopGrid.Visible = false;
-
-            }
-
+            BtnAdd.Visible = false;
         }
 
         protected void BtnAdd_Click(object sender, EventArgs e)
@@ -46,8 +32,6 @@ namespace ExercicioBD
             }
             else
             {
-                senha = CriptografiaSenha.GerarHashMd5(senha);
-
                 Empresa empresa = new Empresa()
                 {
                     RazaoSocial = razao_social,
@@ -55,7 +39,7 @@ namespace ExercicioBD
                     Email = email,
                     Senha = senha
                 };
-                    
+
                 empresa = empresaDao.Inserir(empresa);
                 if (empresa != null)
                 {
@@ -73,16 +57,6 @@ namespace ExercicioBD
 
                 }
             }
-        }
-
-
-        public void PopularGrid()
-        {
-            EmpresaDAO empDao = new EmpresaDAO();
-            DataTable dTable = empDao.ListarTodos();
-
-            GdvEmpresa.DataSource = dTable;
-            GdvEmpresa.DataBind();
         }
 
         protected void TxtSenha_TextChanged(object sender, EventArgs e)
@@ -103,16 +77,6 @@ namespace ExercicioBD
         protected void TxtRazaoSocial_TextChanged(object sender, EventArgs e)
         {
 
-        }
-
-        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void BtnAtualizar(object sender, EventArgs e)
-        {
-            PopularGrid();
         }
     }
 }

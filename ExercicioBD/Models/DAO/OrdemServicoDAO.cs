@@ -85,7 +85,7 @@ namespace ExercicioBD.Models.DAO
                 conn.Comando.Parameters.AddWithValue("@prazo_entrega", os.PrazoEntrega);
                 conn.Comando.Parameters.AddWithValue("@total", os.Total);
                 conn.Comando.Parameters.AddWithValue("@status", os.Status);
-                conn.Comando.Parameters.AddWithValue("@cliente_id", 1);
+                conn.Comando.Parameters.AddWithValue("@cliente_id", os.Cliente.Id);
 
                 int retorno = conn.Comando.ExecuteNonQuery();
                 if (retorno > 0)

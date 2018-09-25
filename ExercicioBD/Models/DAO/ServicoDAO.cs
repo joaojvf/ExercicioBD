@@ -15,10 +15,7 @@ namespace ExercicioBD.Models.DAO
         {
             conn = new ConexaoBD();
         }
-
-
-       
-
+        
         public DataTable ListarTodos()
         {
             try

@@ -1,4 +1,6 @@
-﻿using ExercicioBD.Models.DAO;
+﻿using ExemploBD.Models;
+using ExercicioBD.Models;
+using ExercicioBD.Models.DAO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,10 +13,32 @@ namespace ExercicioBD
 {
     public partial class vwServicos : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {   
+        OrdemServico os;
+        Cliente cliente;
 
-            PopularGrid();
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            cliente = Session["cliente"] as Cliente;
+            os = Session["OrdemDeServico"] as OrdemServico;
+
+            if (!IsPostBack)
+            {
+                cliente = Session["cliente"] as Cliente;
+                os = Session["OrdemDeServico"] as OrdemServico;
+                PopularGrid();
+            }
+           
+        }
+
+        public OrdemServico GerarOrdemServico()
+        {
+            OrdemServico os = new OrdemServico()
+            {
+                DataSolicitacao = DateTime.Now.ToString("dd/MM/yyyy"),
+                Cliente = cliente
+            };
+            OrdemServicoDAO osDao = new OrdemServicoDAO();
+            return osDao.Inserir(os);
         }
 
         public void PopularGrid()
@@ -25,25 +49,51 @@ namespace ExercicioBD
             gdvServico.DataSource = dTable;
             gdvServico.DataBind();
         }
-
-                   
         
 
-        protected void gdvServico_RowUpdating1(object sender, GridViewUpdateEventArgs e)
+        protected void gdvServico_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            string strQtde = (gdvServico.Rows[e.RowIndex].FindControl("txtQuantidade") as TextBox).Text;
+            string strQtde = (gdvServico.Rows[e.RowIndex].FindControl("TxtQuantidade") as TextBox).Text;
+            int qtde;
             double valor = Convert.ToDouble((gdvServico.Rows[e.RowIndex].FindControl("LblValor") as Label).Text);
             int tempo = Convert.ToInt32((gdvServico.Rows[e.RowIndex].FindControl("LblTempo") as Label).Text);
-            int qtde;
+            int cod_servico = Convert.ToInt32((gdvServico.Rows[e.RowIndex].FindControl("LblCodigo") as Label).Text);
+            
 
-            if(Int32.TryParse(strQtde, out qtde))
+            if (Int32.TryParse(strQtde, out qtde))
             {
+                Servico servico = new Servico();
+
+                servico.Nome = (gdvServico.Rows[e.RowIndex].FindControl("LblNome") as Label).Text;
+                servico.Codigo = cod_servico;
+                servico.Valor = valor;
+                servico.TempoMedio = tempo;
+
                 OS_ServicoDAO osDao = new OS_ServicoDAO();
-               // osDao.Inserir()
+                OS_Servico osServ = new OS_Servico()
+                {
+                    ordemServico =os,
+                    servico = servico,
+                    Quantidade = qtde,
+                    Valor = valor,
+                    Prazo = tempo
+                };
+
+                if (osDao.Inserir(osServ))
+                {
+                    LblResultado.Text = "Foi"; 
+                }
+                else
+                {
+                    LblResultado.Text = "Nao FOi";
+                }
+
+
             }
-        
-
-
+            else
+            {
+                LblResultado.Text = "Erro na quantidade!";
+            }
         }
     }
 }
